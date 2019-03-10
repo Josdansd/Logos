@@ -5,6 +5,20 @@
   padding: 1em;
 }
 
+#vmap {
+    background: url('https://i.imgur.com/m6YMarX.png');
+    background-size: cover;
+    filter: saturate(50%);
+}
+
+#vmap svg:not(#rose) path {
+    fill: hsla(20, 20%, 40%, 0.75);
+}
+
+#vmap svg:not(#rose) path[fill="#595353"],
+#vmap svg:not(#rose) path[fill="#e07964"] {
+    fill: hsla(20, 20%, 50%, 0.75);
+}
 
 #cright {
   background: #ca5d48;
