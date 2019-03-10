@@ -45,14 +45,6 @@
   margin: 0em;
 }
 
-#mapCity {
-  text-transform: uppercase;
-  display: block;
-  color: white;
-  background: red;
-  font-size: 12px;
-}
-
 #rose {
   position: absolute;
   width: 100px;
