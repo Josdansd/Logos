@@ -94,7 +94,7 @@ var comayaguaMap = {
 };
 
 jQuery.fn.vectorMap("addMap", "Comayagua", {
-  "width": 474,
-  "height": 721,
+  "width": 417,
+  "height": 493,
   "paths": comayaguaMap
 });
