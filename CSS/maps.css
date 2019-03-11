@@ -6,8 +6,9 @@
 }
 
 #vmap {
-    background: url('https://i.imgur.com/m6YMarX.png');
+    background-image: url('https://i.imgur.com/m6YMarX.png');
     background-size: cover;
+    -webkit-filter: saturate(50%);
     filter: saturate(50%);
 }
 
