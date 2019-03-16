@@ -52,6 +52,7 @@
   fill: #454040;
   top: 1em;
   right: 1em;
+  z-index: 3;
 }
 
 .jqvmap-label {
