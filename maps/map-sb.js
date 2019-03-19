@@ -117,7 +117,7 @@ var santabarbaraMap = {
     }
 };
 
-jQuery.fn.vectorMap("addMap", "Santa Barbara", {
+jQuery.fn.vectorMap("addMap", "Santa Bárbara", {
   "width": 373,
   "height": 463,
   "paths": santabarbaraMap
