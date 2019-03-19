@@ -97,7 +97,7 @@ var copanMap = {
     }
 };
 
-jQuery.fn.vectorMap("addMap", "Copan", {
+jQuery.fn.vectorMap("addMap", "Copán", {
   "width": 407,
   "height": 562,
   "paths": copanMap
