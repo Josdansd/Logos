@@ -81,7 +81,7 @@ var elparaisoMap = {
     }
 };
 
-jQuery.fn.vectorMap("addMap", "El Paraiso", {
+jQuery.fn.vectorMap("addMap", "El Paraíso", {
   "width": 775,
   "height": 441,
   "paths": elparaisoMap
