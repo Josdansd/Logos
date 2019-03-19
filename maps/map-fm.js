@@ -117,7 +117,7 @@ var franciscomorazanMap = {
     }
 };
 
-jQuery.fn.vectorMap("addMap", "Francisco Morazan", {
+jQuery.fn.vectorMap("addMap", "Francisco Morazán", {
   "width": 474,
   "height": 721,
   "paths": franciscomorazanMap
