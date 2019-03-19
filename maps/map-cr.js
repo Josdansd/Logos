@@ -53,7 +53,7 @@ var cortesMap = {
     }
 };
 
-jQuery.fn.vectorMap("addMap", "Cortes", {
+jQuery.fn.vectorMap("addMap", "Cortés", {
   "width": 383,
   "height": 589,
   "paths": cortesMap
