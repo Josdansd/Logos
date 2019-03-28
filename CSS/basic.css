@@ -1,0 +1,167 @@
+/*immediate fixes due to complexity css edit */
+/* this fix the safari / iOS problem with button displays on focus, see subscription button for example */
+input,
+textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+/* fix to truncate long strings on tags */
+.tags a {
+  width: 145px;
+  display: inline-block;
+  line-height: 1em;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* fix for safari ios iphone blog post item heights */
+.items > .item > figure {
+  max-height: 200px !important;
+}
+/* fix for safari horizontal scrolling on quiz's results */
+.post > article {
+  overflow-x: hidden;
+}
+/* fix for iOS emoji convert ascii, right arrow icon */
+#slickQuiz .quizArea > ol.questions li.question ul.answers > li.selected > div:after {
+  content: '\25B6\fe0e' !important;
+}
+/* fix for mobile devices hovers on quizes */
+#slickQuiz .quizArea > ol.questions li.question ul.answers > li > div:before {
+  background: #b15a48;
+}
+@media only screen and (max-width: 720px) {
+  #slickQuiz .quizArea > ol.questions li.question ul.answers > li:hover > div > label {
+    color: inherit !important;
+  }
+  #slickQuiz .quizArea > ol.questions li.question ul.answers > li:not(.selected) > div:before {
+    background: #ffe0b2 !important;
+  }
+  #slickQuiz .quizArea > ol.questions li.question ul.answers > li:not(.selected):hover > div:before {
+    top: 100% !important;
+    z-index: 0 !important;
+  }
+}
+/* fix text color on fb share input */
+div.sharer-message > input {
+  color: #e46249 !important;
+}
+/* fix charcount overlay */
+.sharer-message > span.filled {
+  position: relative;
+  display: block;
+  left: 0;
+  right: 0;
+  margin-top: 1em;
+  padding: 0 1em 1em;
+  background: white;
+}
+/*fondo*/
+body {
+  background-repeat: no-repeat;
+  background-color: hsl(40, 5%, 92%);
+}
+.sheet-slider input,
+.sheet-slider ul {
+  touch-action: none;
+}
+/*Material Colors: http://goo.gl/WNlLWH*/
+header.header {
+  background-color: #212121;
+}
+/*Header*/
+header.error {
+  background-color: #212121;
+}
+/*Header Error 404*/
+.error-info > h1 {
+  background-color: hsl(10, 93%, 64%);
+}
+/*Fondo titulo Error 404*/
+footer {
+  background-color: #212121;
+}
+/*Footer*/
+footer .ft-ct {
+  max-width: 1200px;
+  padding: 0 1.5em;
+  margin: 0 auto;
+  position: relative;
+}
+footer .up {
+  border: 1px solid;
+  color: hsl(14, 62%, 48%);
+  display: inline-block;
+  line-height: 1em;
+  padding: 0.5em 0.5em 0.35em;
+  transition: all 0.35s ease-in-out;
+  position: absolute;
+  top: -.5em;
+  right: 1.5em;
+}
+footer .up:hover {
+  color: hsl(10, 93%, 64%);
+  transform: translateY(-2px);
+}
+/*Cover Menu*/
+.md-menu .cover {
+  background-image: url("https://user-images.githubusercontent.com/20325027/44876954-beeeed00-ac5f-11e8-91d1-1522423e027f.jpg");
+  /* http://i.imgur.com/ac4XbPD.jpg */
+  background-size: cover;
+}
+.md-menu .cover:after {
+  background-color: #212121;
+  /* Transparencia sobre el fondo */
+}
+div.cover {
+  position: relative;
+}
+div.cover > img {
+  width: 50%;
+  margin: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@media only screen and (max-width: 420px) {
+  .md-menu div.cover {
+    height: 150px;
+    padding: 1em;
+  }
+  .md-menu div.cover > img {
+    padding: 1em;
+  }
+}
+/*Comentarios anonimos (avatar)*/
+.avatar-image-container {
+  background-image: url("http://goo.gl/7qWDmc");
+}
+@media only screen and (max-width: 450px) {
+  /* Responsive slides */
+  div.sheet-slider > ul {
+    width: 100%;
+    height: 0;
+    padding-top: 53.48%;
+  }
+  .sheet-slider ul li.tab.one > img {
+    content: url("https://user-images.githubusercontent.com/20325027/44876545-a92cf800-ac5e-11e8-8323-955e4a6386e3.png");
+  }
+  .sheet-slider ul li.tab.two > img {
+    content: url("https://user-images.githubusercontent.com/20325027/44876546-a92cf800-ac5e-11e8-8cf9-3acb363cf655.png");
+  }
+  .sheet-slider ul li.tab.three > img {
+    content: url("https://user-images.githubusercontent.com/20325027/44876547-a9c58e80-ac5e-11e8-9dca-d09f9f629644.png");
+  }
+  .sheet-slider ul li.tab.four > img {
+    content: url("https://user-images.githubusercontent.com/20325027/44876548-a9c58e80-ac5e-11e8-9fa0-093ab860eb1f.png");
+  }
+  .sheet-slider ul li.tab.five > img {
+    content: url("https://user-images.githubusercontent.com/20325027/44876549-a9c58e80-ac5e-11e8-8021-2239189071f3.png");
+  }
+}
