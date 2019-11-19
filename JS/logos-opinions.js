@@ -1,4 +1,4 @@
-// Special opinion page opinion-page, developed by jdsd ups
+// Special opinion page, developed by jdsd ups
 
 function htmlDecode(input) {
 	var e = document.createElement('textarea');
@@ -33,11 +33,12 @@ function dateParser(date) {
 var checkLength = 1;
 var actualLength = 0;
 
-function loadItems(finder) {
+function loadItems(finder, boolean) {
 	if ( actualLength === checkLength ) {
 		alert('No hay más elementos que cargar');
 		return false;
 	} else {
+		$('.ui.dimmer').dimmer('toggle');
         $.get('https://www.logoshn.com/feeds/posts/default/-/Opinion', function(data) {
             var $xml = $(data);
             for (var i = 0; i < 3; i++) {
@@ -64,11 +65,44 @@ function loadItems(finder) {
                         parsedDate = dateParser(baseDate);
                         $('#opinionList').append("<div class='opinion-item' id='" + item.id + "'><h4>" + item.title + "</h4><span>" + parsedDate + "</span></div>");
                         $('.opinion-item.load-more').appendTo('#opinionList');
+						$('.ui.dimmer').dimmer('toggle');
                         return false;
                     });
                 }
             }
-        });
+        }).done(function() {
+			if ( boolean === true ) {
+    			$.get('https://www.logoshn.com/feeds/posts/default/-/Opinion', function(data) {
+                    var $hash;
+                    var $ids = [];
+                    var $listedIDs = [];
+                    var $xml = $(data);
+                    $xml.find("entry").each(function() {
+                        var $this = $(this),
+                            item = {
+                                id: $this.find('id').text().match(/post-[0-9]+$/)
+                            };
+                        $ids.push(item.id);
+                    });
+                    $hash = window.location.hash;
+                    $hash = $hash.replace("#", "");
+                    $('#opinionList').children('.opinion-item:not(".load-more")').each(function(){
+                        $listedIDs.push( 'post-' + $(this).attr('id') );
+                    });
+                    console.log('listed IDs are ' + $listedIDs);
+                    if( isInArray($hash, $ids.toString()) && ! isInArray($hash, $listedIDs.toString()) ) {
+                        console.log('el hash se encontraba en la lista de IDs del RSS y no se encontraba en la lista de IDs cargadas');
+                        loadSpecific($hash);
+                        $('.ui.dimmer').dimmer('toggle');
+                    } else {
+                        console.log('el hash se encontraba en la lista de IDs del RSS pero se se encontraba en la lista de IDs cargadas');
+                        $hash = $hash.match(/[0-9]+$/);
+                        $('#' + $hash).trigger( "click" );
+                        $('.ui.dimmer').dimmer('toggle');
+                    }
+                });
+			}
+		});
 	}
 }
 
@@ -92,6 +126,8 @@ function loadSpecific(parameter) {
 	});
 }
 
+$('.ui.dimmer').dimmer('toggle');
+
 $(document).ready(function() {
 	var disqus_shortname = 'iuslogos';
 	$.ajax({
@@ -101,41 +137,14 @@ $(document).ready(function() {
 		cache: true,
 		success: function() {
 			var $finder = $('#opinionList').children(".opinion-item:not('.load-more')").length;
-			loadItems($finder);
+			loadItems($finder, true);
 			$('#opinionList').append('<div class="opinion-item load-more">Cargar más</div>');
-            $.get('https://www.logoshn.com/feeds/posts/default/-/Opinion', function(data) {
-                var $hash;
-                var $ids = [];
-                var $listedIDs = [];
-                var $xml = $(data);
-                $xml.find("entry").each(function() {
-                    var $this = $(this),
-                        item = {
-                            id: $this.find('id').text().match(/post-[0-9]+$/)
-                        };
-                    $ids.push(item.id);
-                });
-                $hash = window.location.hash;
-                $hash = $hash.replace("#", "");
-                $('#opinionList').children('.opinion-item:not(".load-more")').each(function(){
-                    $listedIDs.push( 'post-' + $(this).attr('id') );
-                });
-                console.log('listed IDs are ' + $listedIDs);
-                if( isInArray($hash, $ids.toString()) && ! isInArray($hash, $listedIDs.toString()) ) {
-                    console.log('the hash matched with an id');
-                    loadSpecific($hash);
-                } else {
-					$hash = $hash.match(/[0-9]+$/);
-					$('#' + $hash).trigger( "click" );
-					console.log('atinamos, creo.' + $hash);
-                }
-            });
 		}
 	});
 
 	$('#opinionList').on('click', '.opinion-item.load-more', function() {
 		var $finder = $('#opinionList').children(".opinion-item:not('.load-more')").length;
-		loadItems($finder);
+		loadItems($finder, false);
 	});
 
 	$('#opinionList').on('click', '.opinion-item:not(".load-more")', function() {
