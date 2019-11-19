@@ -1,0 +1,49 @@
+function arraymove(arr, fromIndex, toIndex) {
+                var element = arr[fromIndex];
+                arr.splice(fromIndex, 1);
+                arr.splice(toIndex, 0, element);
+            }
+
+            function dateParser(date) {
+                var parsedDate = date.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+                arraymove(parsedDate, 2, 3);
+                arraymove(parsedDate, 1, 3);
+                parsedDate.splice(0, 1);
+                parsedDate = parsedDate.join('/');
+                if (parsedDate.includes("1999")) {
+                    parsedDate = parsedDate.replace('1999', '2019');
+                } else if (parsedDate.includes("2000")) {
+                    parsedDate = parsedDate.replace('2000', '2020');
+                }
+                return parsedDate;
+            }
+
+			$(document).ready(function() {
+                $.get('https://www.logoshn.com/feeds/posts/default/-/Opinion', function(data) {
+                    var $xml = $(data);
+                    $xml.find("entry").each(function(){
+                        var $this = $(this).closest('entry'),
+                        item = {
+                            id: $this.find('id').text().match(/[0-9]+$/),
+                            title: $this.find("title").text(),
+                            date: $this.find("published").text(),
+                            authorName: $this.find("author > name").text()
+                        },
+                        baseDate = item.date;
+                        parsedDate = dateParser(baseDate);
+                        $('#opinions').append('<a class="opinion-item" href="/p/la-columna.html#post-' + item.id + '"><h4>' + item.title + '</h4><span>' + parsedDate + '</span></a>')
+                    });
+					const servicesSlider = new Siema({
+                        selector: '#opinions',
+                        loop: true,
+                        perPage: {
+                            300: 1,
+                            740: 3
+                        },
+                        draggable: true,
+                        multipleDrag: true
+                    });
+                    document.querySelector('#s-prev').addEventListener('click', () => servicesSlider.prev());
+                    document.querySelector('#s-next').addEventListener('click', () => servicesSlider.next());
+                });
+			});
