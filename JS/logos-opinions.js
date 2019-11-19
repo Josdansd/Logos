@@ -172,6 +172,9 @@ $(document).ready(function() {
 					},
 					baseDate = item.date;
 				parsedDate = dateParser(baseDate);
+				if ( item.authorName === 'José Domínguez' ) {
+					item.authorName = 'Anónimo';
+				}
 				$('.opinion-view').find("h2").text(item.title);
 				$('.opinion-view').find(".body .opinion-content").html(htmlDecode(item.body));
 				$('.opinion-view').find(".reference > .author > b").text(item.authorName);
