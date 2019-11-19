@@ -92,10 +92,12 @@ function loadItems(finder, boolean) {
                     console.log('listed IDs are ' + $listedIDs);
                     if( isInArray($hash, $ids.toString()) && ! isInArray($hash, $listedIDs.toString()) ) {
                         console.log('el hash se encontraba en la lista de IDs del RSS y no se encontraba en la lista de IDs cargadas');
+						$('#threadRoot').show();
                         loadSpecific($hash);
                         $('.ui.dimmer').dimmer('toggle');
                     } else {
                         console.log('el hash se encontraba en la lista de IDs del RSS pero se se encontraba en la lista de IDs cargadas');
+						$('#threadInit').show();
                         $hash = $hash.match(/[0-9]+$/);
                         $('#' + $hash).trigger( "click" );
                         $('.ui.dimmer').dimmer('toggle');
@@ -148,6 +150,11 @@ $(document).ready(function() {
 	});
 
 	$('#opinionList').on('click', '.opinion-item:not(".load-more")', function() {
+		$('.ui.dimmer').dimmer('toggle');
+		if ( $('#threadRoot').is(":hidden") ) {
+			$('#threadInit').hide();
+			$('#threadRoot').show();
+		}
 		var $id = $(this).attr('id');
 		window.location.hash = 'post-' + $id;
 		$.get('https://www.logoshn.com/feeds/posts/default/-/Opinion', function(data) {
@@ -179,6 +186,7 @@ $(document).ready(function() {
 					config: function() {
 						this.page.identifier = disqus_threadID;
 						this.page.url = disqus_threadURL;
+						$('.ui.dimmer').dimmer('toggle');
 					}
 				});
 			});
