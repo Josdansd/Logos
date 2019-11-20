@@ -175,7 +175,7 @@ $(document).ready(function() {
 				if ( item.authorName === 'José Domínguez' ) {
 					item.authorName = 'Anónimo';
 				}
-				gtag('event', 'page_view', {
+				gtag('event', 'Opinión Vista', {
 					'event_category': 'Artículos de Opiniones',
 					'event_label': item.title
 				});
