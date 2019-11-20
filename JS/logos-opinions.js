@@ -150,55 +150,60 @@ $(document).ready(function() {
 	});
 
 	$('#opinionList').on('click', '.opinion-item:not(".load-more")', function() {
-		$('.ui.dimmer').dimmer('toggle');
-		if ( $('#threadRoot').is(":hidden") ) {
-			$('#threadInit').hide();
-			$('#threadRoot').show();
-		}
-		var $id = $(this).attr('id');
-		window.location.hash = 'post-' + $id;
-		$.get('https://www.logoshn.com/feeds/posts/default/-/Opinion', function(data) {
-			var $xml = $(data);
-			$xml.find("entry > id:contains(" + $id + ")").each(function() {
-				var $this = $(this).closest('entry'),
-					item = {
-						id: $this.find('id').text().match(/[0-9]+$/),
-						title: $this.find("title").text(),
-						link: $this.find("link[rel='alternate']").attr('href'),
-						body: $this.find("content").html(),
-						date: $this.find("published").text(),
-						authorName: $this.find("author > name").text(),
-						authorLink: $this.find("author > uri").text()
-					},
-					baseDate = item.date;
-				parsedDate = dateParser(baseDate);
-				if ( item.authorName === 'José Domínguez' ) {
-					item.authorName = 'Anónimo';
-				}
-				gtag('event', 'Opinión Vista', {
-					'event_category': 'Artículos de Opiniones',
-					'event_label': item.title
-				});
-				$('.opinion-view').find("h2").text(item.title);
-				$('.opinion-view').find(".body .opinion-content").html(htmlDecode(item.body));
-				$('.opinion-view').find(".reference > .author > b").text(item.authorName);
-				$('.opinion-view').find(".reference > .date").text(parsedDate);
-				$('.opinion-share').find('a.button.facebook').attr('href', 'https://www.facebook.com/sharer.php?u=' + item.link);
-				$('.opinion-share').find('a.button.twitter').attr('href', 'https://twitter.com/intent/tweet?text=Lee%20este%20art%C3%ADculo%20de%20Logos%3A%20&url=' + item.link);
-				$('.opinion-share').find('a.button.whatsapp').attr('href', 'https://api.whatsapp.com/send?text=Te%20invito%20a%20leer%20este%20art%C3%ADculo%20de%20derecho%2C%20est%C3%A1%20interesante%3A%20' + item.link);
-				var disqus_threadID = item.id;
-				var disqus_threadURL = item.link;
-				DISQUS.reset({
-					reload: true,
-					config: function() {
-						this.page.identifier = disqus_threadID;
-						this.page.url = disqus_threadURL;
-						$('.ui.dimmer').dimmer('toggle');
+		var thisID = $(this).attr('id');
+		var threadID = $('#threadView').attr('name');
+		if (! thisID === threadID ) {
+			$('.ui.dimmer').dimmer('toggle');
+			if ( $('#threadRoot').is(":hidden") ) {
+				$('#threadInit').hide();
+				$('#threadRoot').show();
+			}
+			var $id = $(this).attr('id');
+			window.location.hash = 'post-' + $id;
+			$.get('https://www.logoshn.com/feeds/posts/default/-/Opinion', function(data) {
+				var $xml = $(data);
+				$xml.find("entry > id:contains(" + $id + ")").each(function() {
+					var $this = $(this).closest('entry'),
+						item = {
+							id: $this.find('id').text().match(/[0-9]+$/),
+							title: $this.find("title").text(),
+							link: $this.find("link[rel='alternate']").attr('href'),
+							body: $this.find("content").html(),
+							date: $this.find("published").text(),
+							authorName: $this.find("author > name").text(),
+							authorLink: $this.find("author > uri").text()
+						},
+						baseDate = item.date;
+					parsedDate = dateParser(baseDate);
+					if ( item.authorName === 'José Domínguez' ) {
+						item.authorName = 'Anónimo';
 					}
+					gtag('event', 'Opinión Vista', {
+						'event_category': 'Artículos de Opiniones',
+						'event_label': item.title
+					});
+					$('#threadView').attr('name', item.id);
+					$('.opinion-view').find("h2").text(item.title);
+					$('.opinion-view').find(".body .opinion-content").html(htmlDecode(item.body));
+					$('.opinion-view').find(".reference > .author > b").text(item.authorName);
+					$('.opinion-view').find(".reference > .date").text(parsedDate);
+					$('.opinion-share').find('a.button.facebook').attr('href', 'https://www.facebook.com/sharer.php?u=' + item.link);
+					$('.opinion-share').find('a.button.twitter').attr('href', 'https://twitter.com/intent/tweet?text=Lee%20este%20art%C3%ADculo%20de%20Logos%3A%20&url=' + item.link);
+					$('.opinion-share').find('a.button.whatsapp').attr('href', 'https://api.whatsapp.com/send?text=Te%20invito%20a%20leer%20este%20art%C3%ADculo%20de%20derecho%2C%20est%C3%A1%20interesante%3A%20' + item.link);
+					var disqus_threadID = item.id;
+					var disqus_threadURL = item.link;
+					DISQUS.reset({
+						reload: true,
+						config: function() {
+							this.page.identifier = disqus_threadID;
+							this.page.url = disqus_threadURL;
+							$('.ui.dimmer').dimmer('toggle');
+						}
+					});
 				});
 			});
-		});
-		$(this).addClass('active');
-		$(this).siblings().removeClass('active');
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active');
+		}
 	});
 });
