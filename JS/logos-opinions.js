@@ -152,7 +152,9 @@ $(document).ready(function() {
 	$('#opinionList').on('click', '.opinion-item:not(".load-more")', function() {
 		var thisID = $(this).attr('id');
 		var threadID = $('#threadView').attr('name');
-		if (! thisID === threadID ) {
+		console.log('se están analizando las ids, el objeto clickeado es ' + thisID + ' elemento cargado ' + threadID);
+		if ( thisID === threadID ) {
+		} else {
 			$('.ui.dimmer').dimmer('toggle');
 			if ( $('#threadRoot').is(":hidden") ) {
 				$('#threadInit').hide();
