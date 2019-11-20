@@ -154,6 +154,7 @@ $(document).ready(function() {
 		var threadID = $('#threadView').attr('name');
 		console.log('se están analizando las ids, el objeto clickeado es ' + thisID + ' elemento cargado ' + threadID);
 		if ( thisID === threadID ) {
+			console.log('las identidades coincidieron, no se cargará nada adicional');
 		} else {
 			$('.ui.dimmer').dimmer('toggle');
 			if ( $('#threadRoot').is(":hidden") ) {
