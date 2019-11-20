@@ -175,6 +175,10 @@ $(document).ready(function() {
 				if ( item.authorName === 'José Domínguez' ) {
 					item.authorName = 'Anónimo';
 				}
+				gtag('event', 'page_view', {
+					'event_category': 'Artículos de Opiniones',
+					'event_label': item.title
+				});
 				$('.opinion-view').find("h2").text(item.title);
 				$('.opinion-view').find(".body .opinion-content").html(htmlDecode(item.body));
 				$('.opinion-view').find(".reference > .author > b").text(item.authorName);
