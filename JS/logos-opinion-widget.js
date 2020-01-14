@@ -58,8 +58,6 @@ $(document).ready(function() {
                 draggable: true,
                 multipleDrag: true
             });
-        } else {
-            console.log('not enough opinons yet');
         }
         $('.opinion-item').each(function() {
             var $el = $(this).find('h4').first();
