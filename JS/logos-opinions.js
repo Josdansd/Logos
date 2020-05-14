@@ -96,7 +96,7 @@ function loadItems(finder, boolean) {
 						$('#threadRoot').show();
                         loadSpecific($hash);
                         $('.ui.dimmer').dimmer('toggle');
-                    } else if ( /#/.test(this.href) ) {
+                    } else if ( /#/.test(window.location.href) ) {
                         console.log('el hash se encontraba en la lista de IDs del RSS pero se encontraba en la lista de IDs cargadas');
 						$('#threadInit').show();
                         $hash = $hash.match(/[0-9]+$/);
@@ -105,7 +105,6 @@ function loadItems(finder, boolean) {
                     } else {
 						console.log('la página no contenía ningún hash');
 						$('#threadInit').show();
-						$('.ui.dimmer').dimmer('toggle');
 					}
                 });
 			}
