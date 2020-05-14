@@ -101,7 +101,6 @@ function loadItems(finder, boolean) {
 						$('#threadInit').show();
                         $hash = $hash.match(/[0-9]+$/);
                         $('#' + $hash).trigger( "click" );
-                        $('.ui.dimmer').dimmer('toggle');
                     } else {
 						console.log('la página no contenía ningún hash');
 						$('#threadInit').show();
@@ -124,7 +123,7 @@ function loadSpecific(parameter) {
 				};
 			baseDate = item.date;
 			parsedDate = dateParser(baseDate);
-			document.title = item.title + ' | Logos';
+			window.top.document.title = item.title + ' | Logos';
 			$('#opinionList').append("<div class='opinion-item' id='" + item.id + "'><h4>" + item.title + "</h4><span>" + parsedDate + "</span></div>");
 			$('.opinion-item.load-more').appendTo('#opinionList');
 			$('#' + item.id).trigger( "click" );
