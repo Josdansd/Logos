@@ -123,7 +123,6 @@ function loadSpecific(parameter) {
 				};
 			baseDate = item.date;
 			parsedDate = dateParser(baseDate);
-			window.top.document.title = item.title + ' | Logos';
 			$('#opinionList').append("<div class='opinion-item' id='" + item.id + "'><h4>" + item.title + "</h4><span>" + parsedDate + "</span></div>");
 			$('.opinion-item.load-more').appendTo('#opinionList');
 			$('#' + item.id).trigger( "click" );
@@ -189,6 +188,7 @@ $(document).ready(function() {
 						'event_category': 'Artículos de Opiniones',
 						'event_label': item.title
 					});
+					window.top.document.title = item.title + ' | Logos';
 					$('#threadView').attr('name', item.id);
 					$('.opinion-view').find("h2").text(item.title);
 					$('.opinion-view').find(".body .opinion-content").html(htmlDecode(item.body));
