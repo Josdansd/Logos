@@ -90,18 +90,23 @@ function loadItems(finder, boolean) {
                         $listedIDs.push( 'post-' + $(this).attr('id') );
                     });
                     console.log('listed IDs are ' + $listedIDs);
+					
                     if( isInArray($hash, $ids.toString()) && ! isInArray($hash, $listedIDs.toString()) ) {
                         console.log('el hash se encontraba en la lista de IDs del RSS y no se encontraba en la lista de IDs cargadas');
 						$('#threadRoot').show();
                         loadSpecific($hash);
                         $('.ui.dimmer').dimmer('toggle');
-                    } else {
-                        console.log('el hash se encontraba en la lista de IDs del RSS pero se se encontraba en la lista de IDs cargadas');
+                    } else if ( /#/.test(this.href) ) {
+                        console.log('el hash se encontraba en la lista de IDs del RSS pero se encontraba en la lista de IDs cargadas');
 						$('#threadInit').show();
                         $hash = $hash.match(/[0-9]+$/);
                         $('#' + $hash).trigger( "click" );
                         $('.ui.dimmer').dimmer('toggle');
-                    }
+                    } else {
+						console.log('la página no contenía ningún hash');
+						$('#threadInit').show();
+						$('.ui.dimmer').dimmer('toggle');
+					}
                 });
 			}
 		});
@@ -120,6 +125,7 @@ function loadSpecific(parameter) {
 				};
 			baseDate = item.date;
 			parsedDate = dateParser(baseDate);
+			document.title = item.title + ' | Logos';
 			$('#opinionList').append("<div class='opinion-item' id='" + item.id + "'><h4>" + item.title + "</h4><span>" + parsedDate + "</span></div>");
 			$('.opinion-item.load-more').appendTo('#opinionList');
 			$('#' + item.id).trigger( "click" );
