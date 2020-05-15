@@ -181,9 +181,6 @@ $(document).ready(function() {
 						},
 						baseDate = item.date;
 					parsedDate = dateParser(baseDate);
-					if ( item.authorName === 'José Domínguez' ) {
-						item.authorName = 'Anónimo';
-					}
 					gtag('event', 'Opinión Vista', {
 						'event_category': 'Artículos de Opiniones',
 						'event_label': item.title
