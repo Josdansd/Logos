@@ -99,7 +99,7 @@ function loadItems(finder, boolean) {
                     } else if ( /#/.test(window.location.href) ) {
                         console.log('el hash se encontraba en la lista de IDs del RSS y sí se encontraba en la lista de IDs cargadas');
 						$('#threadInit').show();
-                        $hash = $hash.match(/([^-]*$)/g);
+                        $hash = $hash.match(/([^-]*$)/);
                         $('#' + $hash).trigger( "click" );
                     } else {
 						console.log('la página no contenía ningún hash');
