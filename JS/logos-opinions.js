@@ -97,13 +97,14 @@ function loadItems(finder, boolean) {
                         loadSpecific($hash);
                         $('.ui.dimmer').dimmer('toggle');
                     } else if ( /#/.test(window.location.href) ) {
-                        console.log('el hash se encontraba en la lista de IDs del RSS pero se encontraba en la lista de IDs cargadas');
+                        console.log('el hash se encontraba en la lista de IDs del RSS y sí se encontraba en la lista de IDs cargadas');
 						$('#threadInit').show();
-                        $hash = $hash.match(/[0-9]+$/);
+                        $hash = $hash.match(/([^-]*$)/g);
                         $('#' + $hash).trigger( "click" );
                     } else {
 						console.log('la página no contenía ningún hash');
 						$('#threadInit').show();
+						$('.ui.dimmer').dimmer('hide');
 					}
                 });
 			}
@@ -201,7 +202,7 @@ $(document).ready(function() {
 						config: function() {
 							this.page.identifier = disqus_threadID;
 							this.page.url = disqus_threadURL;
-							$('.ui.dimmer').dimmer('toggle');
+							$('.ui.dimmer').dimmer('hide');
 						}
 					});
 				});
