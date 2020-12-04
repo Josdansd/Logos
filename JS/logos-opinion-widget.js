@@ -47,7 +47,7 @@ $(document).ready(function() {
             parsedDate = dateParser(baseDate);
             $('#opinions').append('<a class="opinion-item" href="/p/la-columna.html#post-' + item.id + '"><h4>' + item.title + '</h4><span>' + parsedDate + '</span></a>')
         });
-        if ( $('#opinions').find('.opinion.item').length > 3 ) {
+        if ( $('#opinions').find('.opinion-item').length > 3 ) {
             const servicesSlider = new Siema({
                 selector: '#opinions',
                 loop: true,
@@ -81,7 +81,12 @@ $(document).ready(function() {
                 $el.text($truncated);
             }
         });
-        // document.querySelector('#s-prev').addEventListener('click', () => servicesSlider.prev());
-        // document.querySelector('#s-next').addEventListener('click', () => servicesSlider.next());
+        
+        if ( $("#s-prev").length ) {
+            document.querySelector('#s-prev').addEventListener('click', () => servicesSlider.prev());
+        }
+        if ( $("#s-next").length ) {
+            document.querySelector('#s-next').addEventListener('click', () => servicesSlider.next());
+        }
     });
 });
