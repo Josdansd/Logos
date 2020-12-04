@@ -51,8 +51,7 @@ function loadItems(finder, boolean) {
                 actualLength = $('#opinionList').children('.opinion-item:not(".load-more")').length;
                 if ( actualLength === checkLength ) {
                     console.log('los elementos cargados corresponden con los de la RSS, deteniendo el bucle');
-					$('.ui.dimmer').dimmer('hide');
-					alert('No hay más elementos que cargar.');
+		    $('.ui.dimmer').dimmer('hide');
                     return false;
                 } else {
                     $xml.find("entry:eq(" + finder + ")").each(function() {
